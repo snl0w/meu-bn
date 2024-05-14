@@ -17,10 +17,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #310030;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <left>
-      <AnchorPane prefHeight="407.0" prefWidth="328.0" style="-fx-background-color: a20147;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="407.0" prefWidth="328.0" style="-fx-background-color: #121119;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" layoutX="4.0" layoutY="171.0" prefHeight="17.0" prefWidth="320.0" text="MeuBN">
                <font>
@@ -90,9 +89,9 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <ImageView fitHeight="179.0" fitWidth="172.0" layoutX="87.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="98.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../OneDrive/Pictures/BNGX.png" />
+                  <Image url="@../image/BNGX.png" />
                </image>
             </ImageView>
          </children>
@@ -102,7 +101,7 @@
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="400.0" prefWidth="432.0" style="-fx-background-color: #1f0059;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="400.0" prefWidth="432.0" style="-fx-background-color: #1c1726;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" layoutX="152.0" layoutY="49.0" text="Login">
                <font>

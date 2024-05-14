@@ -15,6 +15,16 @@ public class Main extends Application {
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
+
+    }
+    public void carregarMenu() throws Exception {
+
+        Stage menuStage = new Stage();
+        Parent menuRoot = FXMLLoader.load(getClass().getResource("menubn.fxml"));
+        menuStage.initStyle(StageStyle.UNDECORATED);
+        menuStage.setScene(new Scene(menuRoot, 800, 600));
+        menuStage.show();
+
     }
 
 

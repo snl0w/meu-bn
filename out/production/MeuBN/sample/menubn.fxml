@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Menubn">
+   <children>
+      <BorderPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #1d1019;">
+         <left>
+            <VBox prefHeight="720.0" prefWidth="232.0" style="-fx-background-color: #1d1c26;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="299.0" style="-fx-background-color: #1d1c26;" text="Perfil" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/perfil.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="299.0" style="-fx-background-color: #1d1c26;" text="MeusBNs" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/bloco-de-anotacoes.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Button>
+               </children></VBox>
+         </left>
+         <top>
+            <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="1280.0" style="-fx-background-color: #121117;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button alignment="CENTER" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="190.0" style="-fx-background-color: #121117;" text="MEUBN" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="18.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/BNGX.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets right="950.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="95.0" style="-fx-background-color: #1d1c26;" text="Sair" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="30.0" />
+               </padding></HBox>
+         </top>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="blocoDeNotasButton" alignment="BASELINE_CENTER" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="147.0" style="-fx-background-color: #1d1c26;" text="Bloco de notas" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+               </children></VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

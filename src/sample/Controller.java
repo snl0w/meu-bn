@@ -26,11 +26,11 @@ public class Controller {
 
     public void entrarButtonOnAction(ActionEvent e){
 
-        //Esse método serve para avisar o usuário que ele preencheu os campos ou que não inseriu as informações corretas
+
         if(emailTextField.getText().isBlank() == false && senhaPasswordField.getText().isBlank() == false){
-            //entrarMessageLabel.setText("Email ou senha incorretos!");
             validarLogin();
         } else {
+            //Esse método serve para avisar o usuário que ele preencheu os campos ou que não inseriu as informações corretas
             entrarMessageLabel.setText("Por favor insire o email e a senha.");
         }
     }
@@ -41,11 +41,12 @@ public class Controller {
         stage.close();
     }
 
+    //Método para verificar se as informações do usuário estão corretas e dentro do banco de dados
     public void validarLogin(){
         DatabaseConnection conectarAgora = new DatabaseConnection();
         Connection connectDB = conectarAgora.getConnection();
 
-        String verificarLogin = "SELECT count(1) FROM Usuario WHERE email = '" + emailTextField.getText() + "' AND Senha = '" + senhaPasswordField.getText() + "'";
+        String verificarLogin = "SELECT count(1) FROM users WHERE email = '" + emailTextField.getText() + "' AND senha = '" + senhaPasswordField.getText() + "'";
 
         try{
 
@@ -56,9 +57,14 @@ public class Controller {
 
                 if(queryResult.getInt(1) == 1){
 
+
                     entrarMessageLabel.setText("Bem-Vindo(a)!");
+                    carregarMenu();
+                    Stage stage = (Stage) cancelarButton.getScene().getWindow();
+                    stage.close();
 
                 } else {
+                    //Mensagem de erro caso o email ou senha estejam incorretos
                     entrarMessageLabel.setText("Email ou senha incorretos. Tente novamente.");
                 }
 
@@ -68,6 +74,13 @@ public class Controller {
             e.printStackTrace();
         }
 
+    }
+    public void carregarMenu() {
+        try {
+            new Main().carregarMenu();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
