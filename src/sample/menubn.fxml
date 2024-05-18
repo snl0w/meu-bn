@@ -46,7 +46,8 @@
                         <Insets left="30.0" />
                      </padding>
                   </Button>
-               </children></VBox>
+               </children>
+            </VBox>
          </left>
          <top>
             <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="1280.0" style="-fx-background-color: #121117;" BorderPane.alignment="CENTER">
@@ -75,12 +76,10 @@
                      </padding>
                   </Button>
                </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
                <padding>
                   <Insets right="30.0" />
-               </padding></HBox>
+               </padding>
+            </HBox>
          </top>
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />

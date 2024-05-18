@@ -2,16 +2,20 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.xml.transform.Result;
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 
 public class Controller {
 
@@ -23,54 +27,58 @@ public class Controller {
     private TextField emailTextField;
     @FXML
     private PasswordField senhaPasswordField;
+    @FXML
+    private Button entrarButton;
 
-    public void entrarButtonOnAction(ActionEvent e){
-
-
-        if(emailTextField.getText().isBlank() == false && senhaPasswordField.getText().isBlank() == false){
+    @FXML
+    public void entrarButtonOnAction(ActionEvent e) {
+        if (!emailTextField.getText().isBlank() && !senhaPasswordField.getText().isBlank()) {
             validarLogin();
         } else {
-            //Esse método serve para avisar o usuário que ele preencheu os campos ou que não inseriu as informações corretas
-            entrarMessageLabel.setText("Por favor insire o email e a senha.");
+            entrarMessageLabel.setText("Por favor insira o email e a senha.");
         }
     }
 
-    //Esse método serve para fechar o programa no botão "Cancelar"
-    public void cancelarButtonOnAction(ActionEvent e){
+    @FXML
+    public void cancelarButtonOnAction(ActionEvent e) {
         Stage stage = (Stage) cancelarButton.getScene().getWindow();
         stage.close();
     }
 
-    //Método para verificar se as informações do usuário estão corretas e dentro do banco de dados
-    public void validarLogin(){
+    public void validarLogin() {
         DatabaseConnection conectarAgora = new DatabaseConnection();
         Connection connectDB = conectarAgora.getConnection();
 
-        String verificarLogin = "SELECT count(1) FROM Usuario WHERE email = '" + emailTextField.getText() + "' AND Senha = '" + senhaPasswordField.getText() + "'";
+        String verificarLogin = "SELECT count(1) FROM Usuario WHERE email = ? AND Senha = ?";
 
-        try{
+        try {
+            PreparedStatement preparedStatement = connectDB.prepareStatement(verificarLogin);
+            preparedStatement.setString(1, emailTextField.getText());
+            preparedStatement.setString(2, senhaPasswordField.getText());
+            ResultSet queryResult = preparedStatement.executeQuery();
 
-            Statement statement = connectDB.createStatement();
-            ResultSet queryResult = statement.executeQuery(verificarLogin);
-
-            while(queryResult.next()){
-
-                if(queryResult.getInt(1) == 1){
-
-
-                    entrarMessageLabel.setText("Bem-Vindo(a)!");
-
-                } else {
-                    //Mensagem de erro caso o email ou senha estejam incorretos
-                    entrarMessageLabel.setText("Email ou senha incorretos. Tente novamente.");
-                }
-
+            if (queryResult.next() && queryResult.getInt(1) == 1) {
+                entrarMessageLabel.setText("Login bem-sucedido!");
+                goToNextPage();
+            } else {
+                entrarMessageLabel.setText("Email ou senha incorretos. Tente novamente.");
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+            entrarMessageLabel.setText("Erro ao tentar fazer login: " + e.getMessage());
         }
-
     }
 
+    private void goToNextPage() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("menubn.fxml"));
+            Stage stage = (Stage) entrarButton.getScene().getWindow();
+            stage.setScene(new Scene(root, 1280, 720));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            entrarMessageLabel.setText("Erro ao carregar a próxima página: " + e.getMessage());
+        }
+    }
 }
