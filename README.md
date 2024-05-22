@@ -12,7 +12,6 @@ Este projeto trata-se de um aplicativo que visa facilitar as pessoas que querem 
 6. [Licença](#licença)
 7. [Autores](#autores)
 8. [Agradecimentos](#agradecimentos)
-9. [Referências](#referências)
 
 ## Instalação
 Instruções passo a passo sobre como instalar e configurar o ambiente necessário para o projeto.
@@ -34,6 +33,7 @@ npm install
 7. Escreva suas anotações e em seguida clique em "Salvar"
 
 ## Funcionalidades
+- Criar uma conta e logar na conta
 - Criar blocos de notas
 - Criar notas para inserir no bloco de notas
 
