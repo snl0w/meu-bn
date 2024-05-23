@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Menubn">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MenubnController">
    <children>
       <BorderPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #1d1019;">
          <left>
@@ -46,7 +46,8 @@
                         <Insets left="30.0" />
                      </padding>
                   </Button>
-               </children></VBox>
+               </children>
+            </VBox>
          </left>
          <top>
             <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="1280.0" style="-fx-background-color: #121117;" BorderPane.alignment="CENTER">
@@ -75,22 +76,13 @@
                      </padding>
                   </Button>
                </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
                <padding>
                   <Insets right="30.0" />
-               </padding></HBox>
+               </padding>
+            </HBox>
          </top>
          <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="blocoDeNotasButton" alignment="BASELINE_CENTER" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="147.0" style="-fx-background-color: #1d1c26;" text="Bloco de notas" textFill="WHITE">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                  </Button>
-               </children></VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

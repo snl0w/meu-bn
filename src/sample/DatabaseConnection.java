@@ -2,23 +2,22 @@ package sample;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DatabaseConnection {
-    public Connection databaseLink;
+    public Connection getConnection() {
+        Connection connection = null;
+        String databaseName = "meubngx";
+        String databaseUser = "root";
+        String databasePassword = "243245Afv*";
+        String url = "jdbc:mysql://localhost:3306/" + databaseName;
 
-    public Connection getConnection(){
-        String databaseMeuBN = "meubngx";
-        String databaseUsuario = "root";
-        String databaseSenha = "12345Kauan.";
-        String url = "jdbc:mysql://localhost/"+ databaseMeuBN;
-
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            databaseLink = DriverManager.getConnection(url, databaseUsuario, databaseSenha);
-        } catch (Exception e){
+        try {
+            connection = DriverManager.getConnection(url, databaseUser, databasePassword);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return databaseLink;
+        return connection;
     }
 }
