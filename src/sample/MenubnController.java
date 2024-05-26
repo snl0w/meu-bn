@@ -9,13 +9,6 @@ public class MenubnController {
     private Button sairButton;
 
     @FXML
-    public void initialize() {
-        // Qualquer inicialização necessária
-    }
-
-    @FXML
     public void sairButtonOnAction() {
-        // Lógica para o botão Sair
-        System.out.println("Saindo...");
     }
 }

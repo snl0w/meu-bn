@@ -2,16 +2,12 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,6 +25,16 @@ public class LoginController {
     private PasswordField senhaPasswordField;
     @FXML
     private Button entrarButton;
+    @FXML
+    private Button cadastrarButton;
+
+    private void goToNextPage() {
+        TrocarCena.trocarCena((Stage) entrarButton.getScene().getWindow(), "menubn.fxml", 1280, 720);
+    }
+
+    private void abrirCadastro() {
+        TrocarCena.trocarCena((Stage) cadastrarButton.getScene().getWindow(), "cadastro.fxml", 800, 600);
+    }
 
     @FXML
     public void entrarButtonOnAction(ActionEvent e) {
@@ -45,6 +51,11 @@ public class LoginController {
         stage.close();
     }
 
+    @FXML
+    public void cadastrarButtonOnAction(ActionEvent e) {
+        abrirCadastro();
+    }
+
     public void validarLogin() {
         DatabaseConnection conectarAgora = new DatabaseConnection();
         Connection connectDB = conectarAgora.getConnection();
@@ -58,7 +69,6 @@ public class LoginController {
             ResultSet queryResult = preparedStatement.executeQuery();
 
             if (queryResult.next() && queryResult.getInt(1) == 1) {
-                entrarMessageLabel.setText("Login bem-sucedido!");
                 goToNextPage();
             } else {
                 entrarMessageLabel.setText("Email ou senha incorretos. Tente novamente.");
@@ -70,15 +80,5 @@ public class LoginController {
         }
     }
 
-    private void goToNextPage() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("menubn.fxml"));
-            Stage stage = (Stage) entrarButton.getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 720));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            entrarMessageLabel.setText("Erro ao carregar a próxima página: " + e.getMessage());
-        }
-    }
+
 }

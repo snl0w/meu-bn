@@ -167,7 +167,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="cadastrarButton" alignment="CENTER" layoutX="49.0" layoutY="523.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="111.0" style="-fx-background-color: fa1e4e;" text="Cadastrar">
+            <Button fx:id="cadastrarButton" alignment="CENTER" layoutX="49.0" layoutY="523.0" mnemonicParsing="false" onAction="#cadastrarButtonOnAction" prefHeight="34.0" prefWidth="111.0" style="-fx-background-color: fa1e4e;" text="Cadastrar">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
