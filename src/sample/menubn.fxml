@@ -67,7 +67,7 @@
                         <Insets right="950.0" />
                      </HBox.margin>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="95.0" style="-fx-background-color: #1d1c26;" text="Sair" textFill="WHITE">
+                  <Button fx:id="sairButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#sairButtonOnAction" prefHeight="35.0" prefWidth="95.0" style="-fx-background-color: #1d1c26;" text="Sair" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="18.0" />
                      </font>
