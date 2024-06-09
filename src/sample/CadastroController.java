@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class CadastroController2 {
+public class CadastroController {
 
     @FXML
     private Button cancelarButton;
