@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,52 +20,10 @@
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MenubnController">
    <children>
       <BorderPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #1d1019;">
-         <left>
-            <VBox prefHeight="720.0" prefWidth="232.0" style="-fx-background-color: #1d1c26;" BorderPane.alignment="CENTER">
-               <children>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="299.0" style="-fx-background-color: #1d1c26;" text="Perfil" textFill="WHITE">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/perfil.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <padding>
-                        <Insets left="30.0" />
-                     </padding>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="299.0" style="-fx-background-color: #1d1c26;" text="MeusBNs" textFill="WHITE">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/bloco-de-anotacoes.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <padding>
-                        <Insets left="30.0" />
-                     </padding>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-            </VBox>
-         </left>
          <top>
-            <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="1280.0" style="-fx-background-color: #121117;" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="1280.0" style="-fx-background-color: #0D0C0F;" BorderPane.alignment="CENTER">
                <children>
-                  <Button alignment="CENTER" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="190.0" style="-fx-background-color: #121117;" text="MEUBN" textFill="WHITE">
+                  <Button alignment="CENTER" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="190.0" style="-fx-background-color: #0D0C0F;" text="MEUBN" textFill="WHITE">
                      <font>
                         <Font name="Georgia" size="18.0" />
                      </font>
@@ -79,7 +38,7 @@
                         <Insets right="950.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="sairButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#sairButtonOnAction" prefHeight="35.0" prefWidth="95.0" style="-fx-background-color: #1d1c26;" text="Sair" textFill="WHITE">
+                  <Button fx:id="sairButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#sairButtonOnAction" prefHeight="35.0" prefWidth="95.0" style="-fx-background-color: #01BF8B;" text="Sair">
                      <font>
                         <Font name="Arial" size="18.0" />
                      </font>
@@ -100,30 +59,30 @@
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
                   <BorderPane prefHeight="668.0" prefWidth="1048.0">
-                     <left>
-                        <TabPane prefHeight="592.0" prefWidth="1048.0" style="-fx-background-color: #1d1019;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-                          <tabs>
-                            <Tab text="    Perfil    ">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #F4F4F4;">
+                     <center>
+                        <TabPane prefHeight="656.0" prefWidth="1086.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                           <tabs>
+                              <Tab text="    Perfil    ">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #F4F4F4;">
                                        <children>
-                                          <ImageView fitHeight="165.0" fitWidth="177.0" layoutX="431.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="165.0" fitWidth="177.0" layoutX="558.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../image/perfil.png" />
                                              </image>
                                           </ImageView>
-                                          <Label fx:id="usuarioMessageLabel" alignment="CENTER" layoutX="299.0" layoutY="214.0" prefHeight="55.0" prefWidth="429.0" text="Usuário">
+                                          <Label fx:id="usuarioMessageLabel" alignment="CENTER" layoutX="425.0" layoutY="257.0" prefHeight="55.0" prefWidth="429.0" text="Usuário">
                                              <font>
                                                 <Font name="Arial Bold" size="36.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                              </content>
-                            </Tab>
-                            <Tab text="    MeusBNs    ">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #F4F4F4;">
+                                 </content>
+                              </Tab>
+                              <Tab text="    MeusBNs    ">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #F4F4F4;">
                                        <children>
                                           <BorderPane prefHeight="628.0" prefWidth="1049.0">
                                              <top>
@@ -133,13 +92,20 @@
                                                    </padding>
                                                 </HBox>
                                              </top>
-                                             <center>
-                                                <TableView prefHeight="628.0" prefWidth="1049.0" BorderPane.alignment="CENTER">
-                                                  <columns>
-                                                    <TableColumn prefWidth="232.0" text="Blocos de Notas" />
-                                                  </columns>
+                                             <left>
+                                                <TableView prefHeight="564.0" prefWidth="1281.0" BorderPane.alignment="CENTER">
+                                                   <columns>
+                                                      <TableColumn prefWidth="638.857199549675" text="Blocos de Notas" />
+                                                      <TableColumn prefWidth="640.5713849748884" text="Notas" />
+                                                   </columns>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                   <BorderPane.margin>
+                                                      <Insets />
+                                                   </BorderPane.margin>
                                                 </TableView>
-                                             </center>
+                                             </left>
                                           </BorderPane>
                                           <Label alignment="CENTER" layoutX="11.0" layoutY="10.0" prefHeight="45.0" prefWidth="127.0" text="Blocos">
                                              <opaqueInsets>
@@ -149,23 +115,35 @@
                                                 <Font name="Arial Italic" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Button layoutX="122.0" layoutY="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" text="Novo Bn">
+                                          <Button fx:id="novoBnButton" layoutX="122.0" layoutY="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: #01BF8B;" text="Novo Bn" onAction="#abrirNovoBn">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
+                                             <font>
+                                                <Font name="Arial Bold" size="13.0" />
+                                             </font>
+                                             <effect>
+                                                <DropShadow height="7.67" radius="3.335" width="7.67" />
+                                             </effect>
                                           </Button>
-                                          <Button layoutX="226.0" layoutY="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="95.0" text="Excluir Bn">
+                                          <Button layoutX="226.0" layoutY="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #FF0000;" text="Excluir Bn">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
+                                             <font>
+                                                <Font name="Arial Bold" size="13.0" />
+                                             </font>
+                                             <effect>
+                                                <DropShadow height="7.67" radius="3.335" width="7.67" />
+                                             </effect>
                                           </Button>
                                        </children>
                                     </AnchorPane>
-                              </content>
-                            </Tab>
-                          </tabs>
+                                 </content>
+                              </Tab>
+                           </tabs>
                         </TabPane>
-                     </left>
+                     </center>
                   </BorderPane>
                </children></VBox>
          </center>

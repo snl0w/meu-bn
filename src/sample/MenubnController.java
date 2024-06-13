@@ -24,13 +24,19 @@ public class MenubnController{
     private Label usuarioMessageLabel;
 
     @FXML
-    private TableView<BlocoDeNotas> tvBloco;
+    private TableView<?> tabelaBlocos;
 
     @FXML
-    private TableColumn<BlocoDeNotas, String> tcTitulo;
+    private TableColumn<?, ?> colunaBlocos;
 
+    @FXML
+    private TableColumn<?, ?> colunaNotas;
 
-    private ObservableList<BlocoDeNotas> data;
+    @FXML
+    private Button novoBnButton;
+
+    @FXML
+    private Button excluirBnButton;
 
 
 
@@ -40,11 +46,8 @@ public class MenubnController{
         stage.close();
     }
 
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        tcTitulo.setCellValueFactory(new PropertyValueFactory<>("Titulo"));
-        data = FXCollections.observableArrayList(
-                new BlocoDeNotas("Primeiro Bloco")
-        );
-        tvBloco.setItems(data);
+    public void abrirNovoBn(){
+        TrocarCena.trocarCena((Stage) novoBnButton.getScene().getWindow(), "novobn.fxml", 1280, 720);
     }
+
 }
