@@ -17,7 +17,7 @@ Este projeto trata-se de um aplicativo que visa facilitar as pessoas que querem 
 Instruções passo a passo sobre como instalar e configurar o ambiente necessário para o projeto.
 
 ```bash
-git clone https://github.com/seu_usuario/seu_projeto.git
+git clone https://github.com/snl0w/meu-bn.git
 cd seu_projeto
 npm install
 
