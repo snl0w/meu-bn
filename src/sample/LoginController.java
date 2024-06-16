@@ -33,7 +33,7 @@ public class LoginController {
     }
 
     private void abrirCadastro() {
-        TrocarCena.trocarCena((Stage) cadastrarButton.getScene().getWindow(), "cadastro2.fxml", 800, 600);
+        TrocarCena.trocarCena((Stage) cadastrarButton.getScene().getWindow(), "cadastro.fxml", 800, 600);
     }
 
     @FXML

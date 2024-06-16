@@ -4,13 +4,11 @@ public class BlocoDeNotas {
     private int codBloco;
     private String Titulo;
 
-    public BlocoDeNotas(int codBloco, String titulo) {
-        this.codBloco = codBloco;
-        Titulo = titulo;
+    public BlocoDeNotas() {
     }
 
     public BlocoDeNotas(String titulo) {
-        this.Titulo = Titulo;
+        this.Titulo = titulo;
     }
 
     public int getCodBloco() {
@@ -26,6 +24,6 @@ public class BlocoDeNotas {
     }
 
     public void setTitulo(String titulo) {
-        Titulo = titulo;
+        this.Titulo = titulo;
     }
 }

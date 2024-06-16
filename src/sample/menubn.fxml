@@ -84,59 +84,81 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #F4F4F4;">
                                        <children>
-                                          <BorderPane prefHeight="628.0" prefWidth="1049.0">
+                                          <BorderPane prefHeight="628.0" prefWidth="1280.0">
                                              <top>
                                                 <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="1039.0" style="-fx-background-color: #F2F2F2;" BorderPane.alignment="CENTER">
                                                    <padding>
                                                       <Insets right="30.0" />
                                                    </padding>
+                                                   <children>
+                                                      <Button fx:id="novoBlocoButton" alignment="CENTER" mnemonicParsing="false" onAction="#abrirNovoBloco" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: #01BF8B;" text="Novo Bn">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <font>
+                                                            <Font name="Arial Bold" size="13.0" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow height="7.67" radius="3.335" width="7.67" />
+                                                         </effect>
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                         <HBox.margin>
+                                                            <Insets left="30.0" />
+                                                         </HBox.margin>
+                                                      </Button>
+                                                      <Button fx:id="novaNotaButton" alignment="CENTER" mnemonicParsing="false" onAction="#abrirNovaNota" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: #01BF8B;" text="Nova Nota">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <font>
+                                                            <Font name="Arial Bold" size="13.0" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow height="7.67" radius="3.335" width="7.67" />
+                                                         </effect>
+                                                         <HBox.margin>
+                                                            <Insets left="30.0" />
+                                                         </HBox.margin>
+                                                      </Button>
+                                                      <Button fx:id="excluirBnButton" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #FF0000;" text="Excluir Bn">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <font>
+                                                            <Font name="Arial Bold" size="13.0" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow height="7.67" radius="3.335" width="7.67" />
+                                                         </effect>
+                                                         <HBox.margin>
+                                                            <Insets left="30.0" />
+                                                         </HBox.margin>
+                                                      </Button>
+                                                   </children>
                                                 </HBox>
                                              </top>
                                              <left>
-                                                <TableView fx:id="tabelaBlocos" prefHeight="564.0" prefWidth="1281.0" BorderPane.alignment="CENTER">
+                                                <TableView fx:id="tabelaBlocos" prefHeight="564.0" prefWidth="625.0" BorderPane.alignment="CENTER">
                                                    <columns>
-                                                      <TableColumn fx:id="colunaBlocos" prefWidth="638.857199549675" text="Blocos de Notas" />
-                                                      <TableColumn fx:id="colunaNotas" prefWidth="640.5713849748884" text="Notas" />
+                                                      <TableColumn fx:id="colNomeBlocos" prefWidth="693.1428528002331" text="Blocos de Notas" />
                                                    </columns>
-                                                   <opaqueInsets>
-                                                      <Insets />
-                                                   </opaqueInsets>
-                                                   <BorderPane.margin>
-                                                      <Insets />
-                                                   </BorderPane.margin>
                                                 </TableView>
                                              </left>
+                                             <right>
+                                                <TableView fx:id="tabelaNotas" prefHeight="564.0" prefWidth="659.0" BorderPane.alignment="CENTER">
+                                                   <columns>
+                                                      <TableColumn fx:id="colNomeNotas" prefWidth="658.2857578652246" text="Nome das Notas" />
+                                                   </columns>
+                                                </TableView>
+                                             </right>
                                           </BorderPane>
                                           <Label alignment="CENTER" layoutX="11.0" layoutY="10.0" prefHeight="45.0" prefWidth="127.0" text="Blocos">
-                                             <opaqueInsets>
-                                                <Insets />
-                                             </opaqueInsets>
                                              <font>
                                                 <Font name="Arial Italic" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="novoBnButton" layoutX="122.0" layoutY="15.0" mnemonicParsing="false" onAction="#abrirNovoBn" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: #01BF8B;" text="Novo Bn">
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                             <font>
-                                                <Font name="Arial Bold" size="13.0" />
-                                             </font>
-                                             <effect>
-                                                <DropShadow height="7.67" radius="3.335" width="7.67" />
-                                             </effect>
-                                          </Button>
-                                          <Button layoutX="226.0" layoutY="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #FF0000;" text="Excluir Bn">
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                             <font>
-                                                <Font name="Arial Bold" size="13.0" />
-                                             </font>
-                                             <effect>
-                                                <DropShadow height="7.67" radius="3.335" width="7.67" />
-                                             </effect>
-                                          </Button>
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -145,7 +167,8 @@
                         </TabPane>
                      </center>
                   </BorderPane>
-               </children></VBox>
+               </children>
+            </VBox>
          </center>
       </BorderPane>
    </children>
