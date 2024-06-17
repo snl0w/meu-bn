@@ -16,7 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MenubnController{
+public class MenubnController {
 
     @FXML
     private Button sairButton;
@@ -31,12 +31,6 @@ public class MenubnController{
     private TableColumn<BlocoDeNotas, String> colNomeBlocos;
 
     @FXML
-    private TableView<Notas> tabelaNotas;
-
-    @FXML
-    private TableColumn<Notas, String> colNomeNotas;
-
-    @FXML
     private Button novaNotaButton;
 
     @FXML
@@ -45,36 +39,30 @@ public class MenubnController{
     @FXML
     private Button excluirBnButton;
 
-    String query = null;
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
+    private Connection connection;
+    private PreparedStatement preparedStatement;
+    private ResultSet resultSet;
 
+    /**
+     * Inicializa o controlador.
+     */
     public void initialize() {
         try {
-            carregarBlocos();
+            carregarInformacoesTabela();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        tabelaBlocos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                try {
-                    carregarNotas(newSelection.getCodBloco());
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
-    //Carrega os blocos de notas na tabelaBlocos
-    public void carregarBlocos() throws SQLException {
+    /**
+     * Carrega os blocos de notas na tabelaBlocos.
+     */
+    public void carregarInformacoesTabela() throws SQLException {
         try {
             connection = DatabaseConnection.getConnection();
             ObservableList<BlocoDeNotas> listaBloco = FXCollections.observableArrayList();
 
-            query = "SELECT * FROM blocodenotas";
+            String query = "SELECT * FROM blocodenotas";
             resultSet = connection.createStatement().executeQuery(query);
 
             while (resultSet.next()) {
@@ -86,54 +74,67 @@ public class MenubnController{
 
             colNomeBlocos.setCellValueFactory(new PropertyValueFactory<>("Titulo"));
             tabelaBlocos.setItems(listaBloco);
+
+            // Adiciona um listener para tratar a seleção de blocos de notas
+            tabelaBlocos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                if (newSelection != null) {
+                    try {
+                        carregarNotas(newSelection.getCodBloco());
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-    //Método para carregar as notas na tabela notas, mas não está funcionando
-    public void carregarNotas(int codBloco) throws SQLException {
-        try {
-            connection = DatabaseConnection.getConnection();
-            ObservableList<Notas> listaNotas = FXCollections.observableArrayList();
+    /**
+     * Carrega as notas do bloco de notas selecionado na tabelaNotas.
+     */
+    private void carregarNotas(int codBloco) throws SQLException {
+        ObservableList<Notas> listaNotas = FXCollections.observableArrayList();
 
-            query = "SELECT * FROM nota WHERE codBloco = ?";
-            preparedStatement = connection.prepareStatement(query);
-            //preparedStatement.setInt(1, codBloco);
-            resultSet = preparedStatement.executeQuery();
+        String query = "SELECT * FROM notas WHERE codBloco = ?";
+        preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, codBloco);
+        resultSet = preparedStatement.executeQuery();
 
-            System.out.println("Query executada: " + query); // Debug para verificar a consulta SQL
-
-            while (resultSet.next()) {
-                Notas nota = new Notas();
-                nota.setTitulo(resultSet.getString("Titulo"));
-                listaNotas.add(nota);
-            }
-
-            colNomeNotas.setCellValueFactory(new PropertyValueFactory<>("Titulo"));
-            tabelaNotas.setItems(listaNotas);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        while (resultSet.next()) {
+            Notas notas = new Notas();
+            notas.setCodNota(resultSet.getInt("codNota"));
+            notas.setCodBloco(resultSet.getInt("codBloco"));
+            notas.setTitulo(resultSet.getString("Titulo"));
+            notas.setConteudo(resultSet.getString("Conteudo"));
+            listaNotas.add(notas);
         }
+
     }
 
-    //Ao clicar em sair, vai fechar o programa
+    /**
+     * Fecha o programa ao clicar no botão sairButton.
+     */
     @FXML
     public void sairButtonOnAction(ActionEvent e) {
         Stage stage = (Stage) sairButton.getScene().getWindow();
         stage.close();
     }
 
-    //Ao clicar no botão Novo Bn, vai abrir uma tela para inserir o titulo de um novo bloco de notas
+    /**
+     * Abre a tela para inserir o título de um novo bloco de notas.
+     */
     @FXML
-    public void abrirNovoBloco(ActionEvent e){
+    public void abrirNovoBloco(ActionEvent e) {
         TrocarCena.trocarCena((Stage) novoBlocoButton.getScene().getWindow(), "novobloco.fxml", 1280, 720);
     }
 
-    //Ao clicar no botão Nova Nota, vai abrir a tela da criação de uma nova nota para um bloco de notas
+    /**
+     * Abre a tela da criação de uma nova nota para um bloco de notas.
+     */
     @FXML
-    public void abrirNovaNota(ActionEvent e){
+    public void abrirNovaNota(ActionEvent e) {
         TrocarCena.trocarCena((Stage) novaNotaButton.getScene().getWindow(), "novanota.fxml", 1280, 720);
     }
-
 }

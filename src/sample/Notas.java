@@ -3,9 +3,18 @@ package sample;
 public class Notas {
     private int codNota;
     private int codBloco;
+    private String Conteudo;
     private String Titulo;
 
     public Notas() {
+    }
+
+    public void setConteudo(String conteudo){
+        this.Conteudo = conteudo;
+    }
+    public String getConteudo(){
+
+        return Conteudo;
     }
 
     public Notas(String titulo) {

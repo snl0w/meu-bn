@@ -2,8 +2,8 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 import java.sql.Connection;
@@ -28,71 +28,58 @@ public class NovaNotaController {
     @FXML
     private TextArea conteudoNotaArea;
 
-    // Volta ao menuBn
+    // Volta ao menu
     public void voltarMenu() {
         TrocarCena.trocarCena((Stage) voltarButton.getScene().getWindow(), "menubn.fxml", 1280, 720);
     }
 
-    // Salva uma nova nota no banco de dados
-    @FXML
+    // Salva o título do bloco de notas, nome da nota e conteúdo no banco de dados
     public void salvarNota() {
-        String tituloBloco = tituloBlocoField.getText();
-        String nomeNota = nomeNotaField.getText();
-        String conteudoNota = conteudoNotaArea.getText();
+        String tituloBloco = tituloBlocoField.getText().trim();
+        String nomeNota = nomeNotaField.getText().trim();
+        String conteudo = conteudoNotaArea.getText().trim();
 
-        // Validação básica dos campos (opcional)
-        if (tituloBloco.isEmpty() || nomeNota.isEmpty() || conteudoNota.isEmpty()) {
-            // Trate aqui se algum campo estiver vazio
-            return;
-        }
+        if (!tituloBloco.isEmpty() && !nomeNota.isEmpty() && !conteudo.isEmpty()) {
+            try (Connection conn = DatabaseConnection.getConnection()) {
+                conn.setAutoCommit(false); // Inicia a transação
 
-        try {
-            Connection connection = DatabaseConnection.getConnection();
+                try {
+                    // Primeiro, insere o título do bloco de notas
+                    String queryTitulo = "INSERT INTO blocodenotas (titulo, codUsuario) VALUES (?, ?)";
+                    PreparedStatement statementTitulo = conn.prepareStatement(queryTitulo, PreparedStatement.RETURN_GENERATED_KEYS);
+                    statementTitulo.setString(1, tituloBloco);
+                    statementTitulo.setInt(2, 1); // Substitua 1 pelo código do usuário logado ou obtenha dinamicamente
+                    statementTitulo.executeUpdate();
 
-            // Verifica se o bloco existe e obtém o codBloco
-            int codBloco = buscarCodBlocoPorTitulo(connection, tituloBloco);
-            if (codBloco == -1) {
-                // Se o bloco não existir, trate a situação adequadamente
-                System.out.println("O bloco não existe. Trate esta situação conforme necessário.");
-                return;
+                    // Obtém o ID do bloco recém-criado
+                    ResultSet generatedKeys = statementTitulo.getGeneratedKeys();
+                    int blocoId = 0;
+                    if (generatedKeys.next()) {
+                        blocoId = generatedKeys.getInt(1);
+                    }
+
+                    // Em seguida, insere o nome da nota e o conteúdo associado ao bloco
+                    String queryNota = "INSERT INTO notas (codBloco, nome, conteudo, codUsuario) VALUES (?, ?, ?, ?)";
+                    PreparedStatement statementNota = conn.prepareStatement(queryNota);
+                    statementNota.setInt(1, blocoId);
+                    statementNota.setString(2, nomeNota);
+                    statementNota.setString(3, conteudo);
+                    statementNota.setInt(4, 1); // Substitua 1 pelo código do usuário logado ou obtenha dinamicamente
+                    statementNota.executeUpdate();
+
+                    conn.commit(); // Confirma a transação
+                    System.out.println("Nota salva com sucesso!");
+                } catch (SQLException e) {
+                    conn.rollback(); // Reverte a transação em caso de erro
+                    System.err.println("Erro ao salvar nota: " + e.getMessage());
+                } finally {
+                    conn.setAutoCommit(true); // Retorna ao modo de commit automático
+                }
+            } catch (SQLException e) {
+                System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
             }
-
-            // Insere a nota
-            String sql = "INSERT INTO nota (Titulo, Conteudo, codBloco) VALUES (?, ?, ?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, nomeNota);
-            preparedStatement.setString(2, conteudoNota);
-            preparedStatement.setInt(3, codBloco);
-
-            // Executa o INSERT
-            int rowsInserted = preparedStatement.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("Nova nota inserida com sucesso!");
-                // Aqui você pode adicionar lógica para limpar os campos ou exibir uma mensagem de sucesso
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Método para buscar o código do bloco pelo título
-    private int buscarCodBlocoPorTitulo(Connection connection, String tituloBloco) {
-        try {
-            String sql = "SELECT codBloco FROM blocodenotas WHERE Titulo = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, tituloBloco);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                return resultSet.getInt("codBloco");
-            } else {
-                return -1; // Retorna -1 se o bloco não for encontrado
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1; // Retorna -1 em caso de erro
+        } else {
+            System.out.println("Preencha todos os campos necessários.");
         }
     }
 }
