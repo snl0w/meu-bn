@@ -1,5 +1,5 @@
 # MEUBNGX
-
+![meubn](https://github.com/snl0w/meu-bn/assets/142117264/6aafc111-270d-4e5e-a8e4-4adedce81d8b)
 ## Descrição
 Este projeto trata-se de um aplicativo que visa facilitar as pessoas que querem utilizar um bloco de notas de maneira mais eficiente, MeuBN GX fornece a capacidade do usuário ter vários blocos de notas em sua conta e anotar qualquer informação que ele queira.
 
