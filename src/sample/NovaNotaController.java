@@ -1,11 +1,14 @@
 package sample;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -74,6 +77,9 @@ public class NovaNotaController {
                     conn.commit(); // Confirma a transação
                     mensagemSalvamento.setText("Nota salva com sucesso!");
                     clearFields();
+                    //Mensagem desaparece depois de 4 segundos
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(4), evt -> mensagemSalvamento.setText("")));
+                    timeline.play();
                 } catch (SQLException e) {
                     conn.rollback(); // Reverte a transação em caso de erro
                     mensagemSalvamento.setText("Erro ao salvar nota.");
@@ -85,6 +91,9 @@ public class NovaNotaController {
             }
         } else {
             mensagemSalvamento.setText("Preencha todos os campos!");
+            //Mensagem desaparece depois de 4 segundos
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(4), evt -> mensagemSalvamento.setText("")));
+            timeline.play();
         }
     }
 

@@ -37,6 +37,7 @@ public class Main extends Application {
         stage.setScene(new Scene(root, WIDTH, HEIGHT));
     }
 
+    //Main
     public static void main(String[] args) {
         launch(args);
     }

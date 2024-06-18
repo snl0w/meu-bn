@@ -3,22 +3,17 @@ package sample;
 public class Notas {
     private int codNota;
     private int codBloco;
-    private String Conteudo;
-    private String Titulo;
+    private String conteudo;
+    private String titulo;
 
     public Notas() {
     }
 
-    public void setConteudo(String conteudo){
-        this.Conteudo = conteudo;
-    }
-    public String getConteudo(){
-
-        return Conteudo;
-    }
-
-    public Notas(String titulo) {
-        this.Titulo = titulo;
+    public Notas(int codNota, int codBloco, String titulo, String conteudo) {
+        this.codNota = codNota;
+        this.codBloco = codBloco;
+        this.titulo = titulo;
+        this.conteudo = conteudo;
     }
 
     public int getCodNota() {
@@ -38,10 +33,18 @@ public class Notas {
     }
 
     public String getTitulo() {
-        return Titulo;
+        return titulo;
     }
 
     public void setTitulo(String titulo) {
-        this.Titulo = titulo;
+        this.titulo = titulo;
+    }
+
+    public String getConteudo() {
+        return conteudo;
+    }
+
+    public void setConteudo(String conteudo) {
+        this.conteudo = conteudo;
     }
 }

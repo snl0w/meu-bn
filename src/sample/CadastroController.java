@@ -5,10 +5,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class CadastroController {
 
@@ -33,6 +37,7 @@ public class CadastroController {
     @FXML
     private Button loginButton;
 
+    //Cadastra o usuário no banco de dados
     public void cadastrar(ActionEvent event) throws IOException {
         DatabaseConnection connect = new DatabaseConnection();
         Connection con = null;
@@ -48,6 +53,10 @@ public class CadastroController {
 
             if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
                 entrarMessageLabel.setText("Por favor preencha todos os campos.");
+
+                //Mensagem desaparece depois de 4 segundos
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(4), evt -> entrarMessageLabel.setText("")));
+                timeline.play();
             } else {
                 String query = "SELECT * FROM usuario WHERE EMAIL = ?";
                 preparedStatement = con.prepareStatement(query);
@@ -57,6 +66,10 @@ public class CadastroController {
 
                 if (resultSet.next()) {
                     entrarMessageLabel.setText("Email já está em uso.");
+
+                    //Mensagem desaparece depois de 4 segundos
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(4), evt -> entrarMessageLabel.setText("")));
+                    timeline.play();
                 } else {
                     String query_2 = "INSERT INTO usuario (nome, email, senha) VALUES(?,?,?)";
                     preparedStatement = con.prepareStatement(query_2);
@@ -68,6 +81,10 @@ public class CadastroController {
                     preparedStatement.executeUpdate();
 
                     entrarMessageLabel.setText("Conta criada com sucesso!");
+
+                    //Mensagem desaparece depois de 4 segundos
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(4), evt -> entrarMessageLabel.setText("")));
+                    timeline.play();
                 }
             }
         } catch (SQLException e) {
@@ -86,21 +103,25 @@ public class CadastroController {
         clearFields();
     }
 
+    //Limpa os campos nome, email e senha
     public void clearFields() {
         nomeField.setText("");
         emailField.setText("");
         senhaField.setText("");
     }
 
+    //Abre a página de login
     private void abrirLogin() {
         TrocarCena.trocarCena((Stage) loginButton.getScene().getWindow(), "login.fxml", 800, 600);
     }
 
+    //Botão para voltar a página de login
     @FXML
     private void loginButonOnAction() {
         abrirLogin();
     }
 
+    //Botão para sair do programa
     @FXML
     private void cancelarButtonOnAction() {
         Stage stage = (Stage) cancelarButton.getScene().getWindow();

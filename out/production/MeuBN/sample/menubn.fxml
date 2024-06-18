@@ -8,6 +8,8 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,7 +17,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MenubnController">
    <children>
@@ -60,9 +64,9 @@
                <children>
                   <BorderPane prefHeight="668.0" prefWidth="1048.0">
                      <center>
-                        <TabPane prefHeight="656.0" prefWidth="1086.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                        <TabPane fx:id="tabPane" prefHeight="656.0" prefWidth="1086.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                            <tabs>
-                              <Tab text="    Perfil    ">
+                              <Tab closable="false" text="    Perfil    ">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #F4F4F4;">
                                        <children>
@@ -80,7 +84,7 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                              <Tab text="    MeusBNs    ">
+                              <Tab closable="false" text="    MeusBNs    ">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #F4F4F4;">
                                        <children>
@@ -119,7 +123,7 @@
                                                             <Insets left="30.0" />
                                                          </HBox.margin>
                                                       </Button>
-                                                      <Button fx:id="AtualizarButton" alignment="CENTER" mnemonicParsing="false" onAction="#abrirBlocoNota" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: #E2C541;" text="Atualizar">
+                                                      <Button fx:id="atualizarButton" alignment="CENTER" mnemonicParsing="false" onAction="#abrirBlocoNota" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: #E2C541;" text="Atualizar">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -152,6 +156,77 @@
                                                 <Font name="Arial Italic" size="24.0" />
                                              </font>
                                           </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab fx:id="atualizarTab" closable="false" text="Atualizar">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <AnchorPane layoutX="-6.0" layoutY="-4.0" prefHeight="634.0" prefWidth="1292.0" style="-fx-background-color: #F4F4F4;">
+                                             <children>
+                                                <TextField fx:id="tituloBlocoField" layoutX="46.0" layoutY="41.0" prefHeight="25.0" prefWidth="421.0">
+                                                   <effect>
+                                                      <DropShadow height="7.67" radius="3.335" width="7.67">
+                                                         <color>
+                                                            <Color red="0.003921568859368563" green="0.7490196228027344" blue="0.545098066329956" />
+                                                         </color>
+                                                      </DropShadow>
+                                                   </effect>
+                                                </TextField>
+                                                <Text layoutX="46.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título do Bloco" wrappingWidth="218.70806884765625">
+                                                   <font>
+                                                      <Font name="Arial Bold" size="24.0" />
+                                                   </font>
+                                                   <effect>
+                                                      <DropShadow height="7.67" radius="3.335" width="7.67" />
+                                                   </effect>
+                                                </Text>
+                                                <TextArea fx:id="conteudoNotaArea" layoutX="46.0" layoutY="162.0" prefHeight="359.0" prefWidth="1200.0" promptText="Conteúdo">
+                                                   <effect>
+                                                      <DropShadow height="7.67" radius="3.335" width="7.67">
+                                                         <color>
+                                                            <Color red="0.003921568859368563" green="0.7490196228027344" blue="0.545098066329956" />
+                                                         </color>
+                                                      </DropShadow>
+                                                   </effect>
+                                                </TextArea>
+                                                <Text layoutX="46.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome da Nota" wrappingWidth="218.70806884765625">
+                                                   <font>
+                                                      <Font name="Arial Bold" size="24.0" />
+                                                   </font>
+                                                   <effect>
+                                                      <DropShadow height="7.67" radius="3.335" width="7.67" />
+                                                   </effect>
+                                                </Text>
+                                                <TextField fx:id="nomeNotaField" layoutX="46.0" layoutY="115.0" prefHeight="25.0" prefWidth="421.0">
+                                                   <effect>
+                                                      <DropShadow height="7.67" radius="3.335" width="7.67">
+                                                         <color>
+                                                            <Color red="0.003921568859368563" green="0.7490196228027344" blue="0.545098066329956" />
+                                                         </color>
+                                                      </DropShadow>
+                                                   </effect>
+                                                </TextField>
+                                                <Button fx:id="atualizarNotaButton" layoutX="576.0" layoutY="580.0" mnemonicParsing="false" onAction="#atualizarNota" prefHeight="40.0" prefWidth="139.0" style="-fx-background-color: #01BF8B;" text="Atualizar">
+                                                   <font>
+                                                      <Font name="Arial Bold" size="18.0" />
+                                                   </font>
+                                                   <effect>
+                                                      <DropShadow height="7.67" radius="3.335" width="7.67" />
+                                                   </effect>
+                                                </Button>
+                                                <Label fx:id="mensagemLabel" alignment="CENTER" layoutX="465.0" layoutY="531.0" prefHeight="42.0" prefWidth="362.0">
+                                                   <font>
+                                                      <Font name="Arial" size="18.0" />
+                                                   </font>
+                                                   <effect>
+                                                      <DropShadow height="7.66" radius="3.33" width="7.66" />
+                                                   </effect>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
                                        </children>
                                     </AnchorPane>
                                  </content>

@@ -26,4 +26,5 @@ public class BlocoDeNotas {
     public void setTitulo(String titulo) {
         this.Titulo = titulo;
     }
+
 }

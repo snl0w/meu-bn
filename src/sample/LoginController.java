@@ -32,7 +32,9 @@ public class LoginController {
     @FXML
     private Button cadastrarButton;
 
-    private void goToNextPage(int codUsuario) {
+
+    //Vai para o menubn quando as informações de email e senha estão corretas
+    private void proximaPagina(int codUsuario) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("menubn.fxml"));
             Parent root = loader.load();
@@ -49,10 +51,12 @@ public class LoginController {
         }
     }
 
+    //Abre a página de cadastro do usuário
     private void abrirCadastro() {
         TrocarCena.trocarCena((Stage) cadastrarButton.getScene().getWindow(), "cadastro.fxml", 800, 600);
     }
 
+    //Botão que ao ser clicado, verifica o login do usuário
     @FXML
     public void entrarButtonOnAction(ActionEvent e) {
         if (!emailTextField.getText().isBlank() && !senhaPasswordField.getText().isBlank()) {
@@ -62,17 +66,20 @@ public class LoginController {
         }
     }
 
+    //Fecha o programa
     @FXML
     public void cancelarButtonOnAction(ActionEvent e) {
         Stage stage = (Stage) cancelarButton.getScene().getWindow();
         stage.close();
     }
 
+    //Botão para abrir o cadastro
     @FXML
     public void cadastrarButtonOnAction(ActionEvent e) {
         abrirCadastro();
     }
 
+    //Valida se as informações do usuário estão presentes e corretas no banco de dados
     public void validarLogin() {
         DatabaseConnection conectarAgora = new DatabaseConnection();
         Connection connectDB = conectarAgora.getConnection();
@@ -87,7 +94,7 @@ public class LoginController {
 
             if (queryResult.next()) {
                 int codUsuario = queryResult.getInt("codUsuario");
-                goToNextPage(codUsuario);
+                proximaPagina(codUsuario);
             } else {
                 entrarMessageLabel.setText("Email ou senha incorretos. Tente novamente.");
             }

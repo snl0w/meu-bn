@@ -26,16 +26,24 @@ npm install
 ## Uso
 1. Clicar em se cadastrar
 2. Inserir nome, email e senha
-3. Após criar a conta, clique em logar
+3. Após criar a conta, clique em login
 4. Insira o email e senha cadastrador, depois clique em "Entrar"
 5. Dentro do MeuBNGX, clique em "MeusBns"
-6. Clique em "Novo Bloco de Notas"
-7. Escreva suas anotações e em seguida clique em "Salvar"
+6. Clique em "Nova Nota"
+7. Preencha os campos "Título do Bloco", "Nome da Nota" e "Conteúdo"
+8. Clique em "Salvar", após isso clique em "Voltar" no canto superior direito
+9. Abra a aba "MeusBns" e veja o Bloco de Notas que você criou na tabela "Blocos de Notas"
+10. Para excluir um bloco de notas, selecione o bloco de notas que deseja excluir e em seguida clique em "Excluir Bn"
+11. Para atualizar um bloco de notas, clique duas vezes em cima do bloco de notas desejado, ou clique apenas uma vez no item e em seguida clique em "Atualizar"
+12. Atualize os campos desejados e em seguida clique em "Atualizar", após isso clique em "Voltar"
+
 
 ## Funcionalidades
-- Criar uma conta e logar na conta
+- Criar uma conta e fazer login
 - Criar blocos de notas
-- Criar notas para inserir no bloco de notas
+- Criar notas e escrever seus conteúdos
+- Excluir blocos de notas
+- Atualizar blocos de notas
 
 ## Tecnologias Utilizadas
 - [Java](https://docs.oracle.com/en/java/) - Linguagem utilizada
@@ -59,4 +67,5 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE.md](L
 - Kauan Davi Oliveira de Sá - [Kauan3005](https://github.com/Kauan3005)
 
 ## Agradecimentos
-- Pedro Manoel
+- Pedro Manoel Ribeiro Rosa - [manoel1039](https://github.com/manoel1039)
+- Daniel Umberto Timóteo Damazio - [DanielSUTD](https://github.com/DanielSUTD)
