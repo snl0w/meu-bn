@@ -63,7 +63,7 @@ Instruções para desenvolvedores interessados em contribuir com o projeto.
 Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE.md](LICENSE.txt) para mais detalhes.
 
 ## Autores
-- Khaled Ahmed Rodrigues Marques Valdivino - [Snlow](https://github.com/snl0w)
+- Khaled Ahmed Rodrigues Marques Valdivino - [Snl0w](https://github.com/snl0w)
 - Kauan Davi Oliveira de Sá - [Kauan3005](https://github.com/Kauan3005)
 
 ## Agradecimentos
