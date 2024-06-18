@@ -34,29 +34,28 @@ public class MenubnController {
     private Button novaNotaButton;
 
     @FXML
-    private Button novoBlocoButton;
-
-    @FXML
     private Button excluirBnButton;
 
+    private String nomeUsuario;
+
+    String query = null;
     private Connection connection;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
+    private int codUsuario;
 
-    /**
-     * Inicializa o controlador.
-     */
+    //Inicializa o controlador
     public void initialize() {
         try {
             carregarInformacoesTabela();
+            carregarNomeUsuario();
+            usuarioMessageLabel.setText(nomeUsuario);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Carrega os blocos de notas na tabelaBlocos.
-     */
+    //Carrega os blocos de notas na tabelaBlocos
     public void carregarInformacoesTabela() throws SQLException {
         try {
             connection = DatabaseConnection.getConnection();
@@ -75,66 +74,67 @@ public class MenubnController {
             colNomeBlocos.setCellValueFactory(new PropertyValueFactory<>("Titulo"));
             tabelaBlocos.setItems(listaBloco);
 
-            // Adiciona um listener para tratar a seleção de blocos de notas
-            tabelaBlocos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-                if (newSelection != null) {
-                    try {
-                        carregarNotas(newSelection.getCodBloco());
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-    /**
-     * Carrega as notas do bloco de notas selecionado na tabelaNotas.
-     */
-    private void carregarNotas(int codBloco) throws SQLException {
-        ObservableList<Notas> listaNotas = FXCollections.observableArrayList();
+    // Método para carregar o nome do usuário que fez login
+    private void carregarNomeUsuario() throws SQLException {
+        String query = "SELECT Nome FROM usuario WHERE codUsuario = ?"; // Ajuste a consulta conforme necessário
+        int codUsuario = 1; // Substitua pelo código do usuário autenticado
 
-        String query = "SELECT * FROM notas WHERE codBloco = ?";
-        preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1, codBloco);
-        resultSet = preparedStatement.executeQuery();
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-        while (resultSet.next()) {
-            Notas notas = new Notas();
-            notas.setCodNota(resultSet.getInt("codNota"));
-            notas.setCodBloco(resultSet.getInt("codBloco"));
-            notas.setTitulo(resultSet.getString("Titulo"));
-            notas.setConteudo(resultSet.getString("Conteudo"));
-            listaNotas.add(notas);
+            stmt.setInt(1, codUsuario);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                nomeUsuario = rs.getString("Nome");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
         }
-
     }
 
-    /**
-     * Fecha o programa ao clicar no botão sairButton.
-     */
+    //Fecha o programa ao clicar no botão sairButton
     @FXML
     public void sairButtonOnAction(ActionEvent e) {
         Stage stage = (Stage) sairButton.getScene().getWindow();
         stage.close();
     }
 
-    /**
-     * Abre a tela para inserir o título de um novo bloco de notas.
-     */
-    @FXML
-    public void abrirNovoBloco(ActionEvent e) {
-        TrocarCena.trocarCena((Stage) novoBlocoButton.getScene().getWindow(), "novobloco.fxml", 1280, 720);
-    }
-
-    /**
-     * Abre a tela da criação de uma nova nota para um bloco de notas.
-     */
+    //Abre a tela da criação de um novo bloco de notas para um novo bloco e uma nota
     @FXML
     public void abrirNovaNota(ActionEvent e) {
         TrocarCena.trocarCena((Stage) novaNotaButton.getScene().getWindow(), "novanota.fxml", 1280, 720);
     }
+
+    @FXML
+    public void excluirBlocoNota(ActionEvent e) {
+        BlocoDeNotas blocoSelecionado = tabelaBlocos.getSelectionModel().getSelectedItem();
+
+        if (blocoSelecionado != null) {
+            try {
+                connection = DatabaseConnection.getConnection();
+                String query = "DELETE FROM blocodenotas WHERE codBloco = ?";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, blocoSelecionado.getCodBloco());
+                preparedStatement.executeUpdate();
+
+                // Remover o bloco excluído da tabela
+                tabelaBlocos.getItems().remove(blocoSelecionado);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+
+    public void setCodUsuario(int codUsuario){
+        this.codUsuario = codUsuario;
+    }
+
 }

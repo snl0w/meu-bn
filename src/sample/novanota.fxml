@@ -87,7 +87,7 @@
             </DropShadow>
          </effect>
       </TextField>
-      <Label alignment="CENTER" layoutX="553.0" layoutY="630.0" prefHeight="20.0" prefWidth="173.0" textFill="#04900d">
+      <Label fx:id="mensagemSalvamento" alignment="CENTER" layoutX="471.0" layoutY="630.0" prefHeight="20.0" prefWidth="337.0">
          <font>
             <Font name="Arial Bold" size="17.0" />
          </font>

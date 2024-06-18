@@ -2,6 +2,7 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -19,6 +20,7 @@ public class NovoBlocoController {
 
     @FXML
     private TextField tituloBlocoField;
+
 
     // Volta ao menuBn
     public void voltarMenu() {
@@ -45,4 +47,5 @@ public class NovoBlocoController {
             System.out.println("Campo de título está vazio.");
         }
     }
+
 }

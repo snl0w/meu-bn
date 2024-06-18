@@ -2,6 +2,7 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
@@ -27,6 +28,9 @@ public class NovaNotaController {
 
     @FXML
     private TextArea conteudoNotaArea;
+
+    @FXML
+    private Label mensagemSalvamento;
 
     // Volta ao menu
     public void voltarMenu() {
@@ -68,18 +72,26 @@ public class NovaNotaController {
                     statementNota.executeUpdate();
 
                     conn.commit(); // Confirma a transação
-                    System.out.println("Nota salva com sucesso!");
+                    mensagemSalvamento.setText("Nota salva com sucesso!");
+                    clearFields();
                 } catch (SQLException e) {
                     conn.rollback(); // Reverte a transação em caso de erro
-                    System.err.println("Erro ao salvar nota: " + e.getMessage());
+                    mensagemSalvamento.setText("Erro ao salvar nota.");
                 } finally {
                     conn.setAutoCommit(true); // Retorna ao modo de commit automático
                 }
             } catch (SQLException e) {
-                System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
+                mensagemSalvamento.setText("Erro!");
             }
         } else {
-            System.out.println("Preencha todos os campos necessários.");
+            mensagemSalvamento.setText("Preencha todos os campos!");
         }
     }
+
+    public void clearFields() {
+        tituloBlocoField.setText("");
+        nomeNotaField.setText("");
+        conteudoNotaArea.setText("");
+    }
+
 }

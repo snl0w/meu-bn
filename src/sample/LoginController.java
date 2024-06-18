@@ -2,12 +2,16 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,8 +32,21 @@ public class LoginController {
     @FXML
     private Button cadastrarButton;
 
-    private void goToNextPage() {
-        TrocarCena.trocarCena((Stage) entrarButton.getScene().getWindow(), "menubn.fxml", 1280, 720);
+    private void goToNextPage(int codUsuario) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("menubn.fxml"));
+            Parent root = loader.load();
+
+            // Obtendo o controller do MenubnController
+            MenubnController menubnController = loader.getController();
+            menubnController.setCodUsuario(codUsuario);
+
+            Stage stage = (Stage) entrarButton.getScene().getWindow();
+            stage.setScene(new Scene(root, 1280, 720));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void abrirCadastro() {
@@ -60,7 +77,7 @@ public class LoginController {
         DatabaseConnection conectarAgora = new DatabaseConnection();
         Connection connectDB = conectarAgora.getConnection();
 
-        String verificarLogin = "SELECT count(1) FROM Usuario WHERE email = ? AND Senha = ?";
+        String verificarLogin = "SELECT codUsuario FROM Usuario WHERE email = ? AND Senha = ?";
 
         try {
             PreparedStatement preparedStatement = connectDB.prepareStatement(verificarLogin);
@@ -68,8 +85,9 @@ public class LoginController {
             preparedStatement.setString(2, senhaPasswordField.getText());
             ResultSet queryResult = preparedStatement.executeQuery();
 
-            if (queryResult.next() && queryResult.getInt(1) == 1) {
-                goToNextPage();
+            if (queryResult.next()) {
+                int codUsuario = queryResult.getInt("codUsuario");
+                goToNextPage(codUsuario);
             } else {
                 entrarMessageLabel.setText("Email ou senha incorretos. Tente novamente.");
             }
@@ -79,6 +97,4 @@ public class LoginController {
             entrarMessageLabel.setText("Erro ao tentar fazer login: " + e.getMessage());
         }
     }
-
-
 }

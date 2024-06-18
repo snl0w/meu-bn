@@ -105,7 +105,7 @@
                                                             <Insets left="30.0" />
                                                          </HBox.margin>
                                                       </Button>
-                                                      <Button fx:id="excluirBnButton" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #FF0000;" text="Excluir Bn">
+                                                      <Button fx:id="excluirBnButton" alignment="CENTER" mnemonicParsing="false" onAction="#excluirBlocoNota" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #FF0000;" text="Excluir Bn">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>

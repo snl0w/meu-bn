@@ -20,7 +20,7 @@
       <console name="MeubnGX" type="STANDARD" schema="" session="Main" />
     </connection>
     <connection id="a60eaee3-d6bf-45e9-a26e-4ddf5b00f08a">
-      <console name="MySQL Connection" type="STANDARD" schema="meubngx" session="Main"><![CDATA[RENAME TABLE blocos TO blocodenotas;]]></console>
+      <console name="MySQL Connection" type="STANDARD" schema="meubngx" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
