@@ -14,9 +14,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NovaNotaController">
+<AnchorPane prefHeight="727.0" prefWidth="1290.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DetalheblocoController">
    <children>
-      <Pane prefHeight="65.0" prefWidth="1280.0" style="-fx-background-color: #0F0F0F;">
+      <Pane prefHeight="75.0" prefWidth="1290.0" style="-fx-background-color: #0F0F0F;">
          <children>
             <Button fx:id="voltarButton" layoutX="1178.0" layoutY="16.0" mnemonicParsing="false" onAction="#voltarMenu" prefHeight="34.0" prefWidth="88.0" style="-fx-background-color: #01BF8B;" text="Voltar">
                <font>
@@ -33,7 +33,7 @@
             </ImageView>
          </children>
       </Pane>
-      <TextField fx:id="tituloBlocoField" layoutX="40.0" layoutY="110.0" prefHeight="25.0" prefWidth="421.0">
+      <TextField fx:id="tituloBlocoField" layoutX="50.0" layoutY="120.0" prefHeight="25.0" prefWidth="421.0">
          <effect>
             <DropShadow height="7.67" radius="3.335" width="7.67">
                <color>
@@ -42,7 +42,7 @@
             </DropShadow>
          </effect>
       </TextField>
-      <Text layoutX="40.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título do Bloco" wrappingWidth="218.70806884765625">
+      <Text layoutX="50.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título do Bloco" wrappingWidth="218.70806884765625">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
@@ -50,7 +50,7 @@
             <DropShadow height="7.67" radius="3.335" width="7.67" />
          </effect>
       </Text>
-      <TextArea fx:id="conteudoNotaArea" layoutX="40.0" layoutY="231.0" prefHeight="385.0" prefWidth="1200.0" promptText="Conteúdo">
+      <TextArea fx:id="conteudoNotaArea" layoutX="50.0" layoutY="241.0" prefHeight="385.0" prefWidth="1200.0" promptText="Conteúdo">
          <effect>
             <DropShadow height="7.67" radius="3.335" width="7.67">
                <color>
@@ -59,7 +59,7 @@
             </DropShadow>
          </effect>
       </TextArea>
-      <Button fx:id="salvarButton" layoutX="563.0" layoutY="656.0" mnemonicParsing="false" onAction="#salvarNota" prefHeight="41.0" prefWidth="154.0" style="-fx-background-color: #01BF8B;" text="Salvar">
+      <Button fx:id="atualizarButton" layoutX="572.0" layoutY="671.0" mnemonicParsing="false" onAction="#salvarNovaNota" prefHeight="41.0" prefWidth="154.0" style="-fx-background-color: #01BF8B;" text="Atualizar">
          <effect>
             <DropShadow height="7.67" radius="3.335" width="7.67" />
          </effect>
@@ -70,7 +70,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Text layoutX="40.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome da Nota" wrappingWidth="218.70806884765625">
+      <Text layoutX="50.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome da Nota" wrappingWidth="218.70806884765625">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
@@ -78,7 +78,7 @@
             <DropShadow height="7.67" radius="3.335" width="7.67" />
          </effect>
       </Text>
-      <TextField fx:id="nomeNotaField" layoutX="40.0" layoutY="184.0" prefHeight="25.0" prefWidth="421.0">
+      <TextField fx:id="nomeNotaField" layoutX="50.0" layoutY="194.0" prefHeight="25.0" prefWidth="421.0">
          <effect>
             <DropShadow height="7.67" radius="3.335" width="7.67">
                <color>
@@ -87,10 +87,11 @@
             </DropShadow>
          </effect>
       </TextField>
-      <Label fx:id="mensagemSalvamento" alignment="CENTER" layoutX="471.0" layoutY="630.0" prefHeight="20.0" prefWidth="337.0">
+      <Label fx:id="mensagemSalvamentoLabel" alignment="CENTER" layoutX="481.0" layoutY="640.0" prefHeight="20.0" prefWidth="337.0">
          <font>
             <Font name="Arial Bold" size="17.0" />
          </font>
       </Label>
+      <Label fx:id="ConteudoLabel" layoutX="635.0" layoutY="137.0" prefHeight="69.0" prefWidth="212.0" />
    </children>
 </AnchorPane>

@@ -36,6 +36,9 @@ public class MenubnController {
     @FXML
     private Button excluirBnButton;
 
+    @FXML
+    private Button AtualizarButton;
+
     private String nomeUsuario;
 
     String query = null;
@@ -50,10 +53,18 @@ public class MenubnController {
             carregarInformacoesTabela();
             carregarNomeUsuario();
             usuarioMessageLabel.setText(nomeUsuario);
+
+            // Adiciona um listener para detectar cliques em itens da tabela
+            tabelaBlocos.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2) { // Detecta um clique duplo
+                    abrirBlocoNota();
+                }
+            });
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     //Carrega os blocos de notas na tabelaBlocos
     public void carregarInformacoesTabela() throws SQLException {
@@ -128,6 +139,21 @@ public class MenubnController {
                 tabelaBlocos.getItems().remove(blocoSelecionado);
             } catch (SQLException ex) {
                 ex.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    public void abrirBlocoNota() {
+        BlocoDeNotas blocoSelecionado = tabelaBlocos.getSelectionModel().getSelectedItem();
+
+        if (blocoSelecionado != null) {
+            try {
+                // Passar os detalhes do bloco de notas para a nova cena
+                Stage stage = (Stage) tabelaBlocos.getScene().getWindow();
+                TrocarCena.trocarCena(stage, "detalhebloco.fxml", 1280, 720, blocoSelecionado);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
