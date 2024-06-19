@@ -183,7 +183,14 @@ public class MenubnController {
 
         if (blocoSelecionado != null) {
             try {
-                String query = "UPDATE notas SET nome = ?, conteudo = ? WHERE codBloco = ?";
+                connection = DatabaseConnection.getConnection();
+                String query = "UPDATE blocodenotas SET titulo = ? WHERE codBloco = ?";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, tituloBlocoField.getText());
+                preparedStatement.setInt(2, blocoSelecionado.getCodBloco());
+                preparedStatement.executeUpdate();
+
+                query = "UPDATE notas SET nome = ?, conteudo = ? WHERE codBloco = ?";
 
                 preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, nomeNotaField.getText());
@@ -193,11 +200,12 @@ public class MenubnController {
 
                 mensagemLabel.setText("Nota atualizada com sucesso!");
 
-                Timeline timeline = new Timeline(new KeyFrame(
-                        Duration.millis(3000),
-                        ae -> mensagemLabel.setText("")));
+                mensagemLabel.setText("Bloco e nota atualizada com sucesso!");
+                clearFields();
+                carregarInformacoesTabela();
+                //Mensagem desaparece depois de 4 segundos
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(4), evt -> mensagemLabel.setText("")));
                 timeline.play();
-
             } catch (SQLException ex) {
                 ex.printStackTrace();
                 mensagemLabel.setText("Erro ao atualizar nota.");
@@ -213,4 +221,12 @@ public class MenubnController {
         this.nomeUsuario = nomeUsuario;
         usuarioMessageLabel.setText(nomeUsuario);  // Configura o texto do Label aqui
     }
+
+    //Método para limpar os campos titulo, nome da nota e conteudo
+    public void clearFields() {
+        tituloBlocoField.setText("");
+        nomeNotaField.setText("");
+        conteudoNotaArea.setText("");
+    }
+
 }
