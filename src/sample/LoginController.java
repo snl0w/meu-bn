@@ -32,9 +32,16 @@ public class LoginController {
     @FXML
     private Button cadastrarButton;
 
+    private Connection connectDB;
 
-    //Vai para o menubn quando as informações de email e senha estão corretas
-    private void proximaPagina(int codUsuario) {
+    @FXML
+    public void initialize() {
+        DatabaseConnection conectarAgora = new DatabaseConnection();
+        connectDB = conectarAgora.getConnection();
+    }
+
+    // Vai para o menubn quando as informações de email e senha estão corretas
+    private void proximaPagina(int codUsuario, String nomeUsuario) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("menubn.fxml"));
             Parent root = loader.load();
@@ -42,6 +49,7 @@ public class LoginController {
             // Obtendo o controller do MenubnController
             MenubnController menubnController = loader.getController();
             menubnController.setCodUsuario(codUsuario);
+            menubnController.setNomeUsuario(nomeUsuario);
 
             Stage stage = (Stage) entrarButton.getScene().getWindow();
             stage.setScene(new Scene(root, 1280, 720));
@@ -51,12 +59,12 @@ public class LoginController {
         }
     }
 
-    //Abre a página de cadastro do usuário
+    // Abre a página de cadastro do usuário
     private void abrirCadastro() {
         TrocarCena.trocarCena((Stage) cadastrarButton.getScene().getWindow(), "cadastro.fxml", 800, 600);
     }
 
-    //Botão que ao ser clicado, verifica o login do usuário
+    // Botão que ao ser clicado, verifica o login do usuário
     @FXML
     public void entrarButtonOnAction(ActionEvent e) {
         if (!emailTextField.getText().isBlank() && !senhaPasswordField.getText().isBlank()) {
@@ -66,25 +74,22 @@ public class LoginController {
         }
     }
 
-    //Fecha o programa
+    // Fecha o programa
     @FXML
     public void cancelarButtonOnAction(ActionEvent e) {
         Stage stage = (Stage) cancelarButton.getScene().getWindow();
         stage.close();
     }
 
-    //Botão para abrir o cadastro
+    // Botão para abrir o cadastro
     @FXML
     public void cadastrarButtonOnAction(ActionEvent e) {
         abrirCadastro();
     }
 
-    //Valida se as informações do usuário estão presentes e corretas no banco de dados
+    // Valida se as informações do usuário estão presentes e corretas no banco de dados
     public void validarLogin() {
-        DatabaseConnection conectarAgora = new DatabaseConnection();
-        Connection connectDB = conectarAgora.getConnection();
-
-        String verificarLogin = "SELECT codUsuario FROM Usuario WHERE email = ? AND Senha = ?";
+        String verificarLogin = "SELECT codUsuario, Nome FROM Usuario WHERE email = ? AND Senha = ?";
 
         try {
             PreparedStatement preparedStatement = connectDB.prepareStatement(verificarLogin);
@@ -94,7 +99,8 @@ public class LoginController {
 
             if (queryResult.next()) {
                 int codUsuario = queryResult.getInt("codUsuario");
-                proximaPagina(codUsuario);
+                String nomeUsuario = queryResult.getString("Nome");
+                proximaPagina(codUsuario, nomeUsuario);
             } else {
                 entrarMessageLabel.setText("Email ou senha incorretos. Tente novamente.");
             }

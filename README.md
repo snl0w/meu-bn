@@ -1,5 +1,5 @@
 # MEUBNGX
-
+![meubn](https://github.com/snl0w/meu-bn/assets/142117264/6aafc111-270d-4e5e-a8e4-4adedce81d8b)
 ## Descrição
 Este projeto trata-se de um aplicativo que visa facilitar as pessoas que querem utilizar um bloco de notas de maneira mais eficiente, MeuBN GX fornece a capacidade do usuário ter vários blocos de notas em sua conta e anotar qualquer informação que ele queira.
 
@@ -63,7 +63,7 @@ Instruções para desenvolvedores interessados em contribuir com o projeto.
 Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE.md](LICENSE.txt) para mais detalhes.
 
 ## Autores
-- Khaled Ahmed Rodrigues Marques Valdivino - [Snlow](https://github.com/snl0w)
+- Khaled Ahmed Rodrigues Marques Valdivino - [Snl0w](https://github.com/snl0w)
 - Kauan Davi Oliveira de Sá - [Kauan3005](https://github.com/Kauan3005)
 
 ## Agradecimentos

@@ -67,12 +67,10 @@ public class MenubnController {
     private ResultSet resultSet;
     private int codUsuario;
 
-
-    //Inicializador que vai carregar as informações do bloco de notas
+    // Inicializador que vai carregar as informações do bloco de notas
     public void initialize() {
         try {
             carregarInformacoesTabela();
-            carregarNomeUsuario();
             usuarioMessageLabel.setText(nomeUsuario);
 
             tabelaBlocos.setOnMouseClicked(event -> {
@@ -85,7 +83,7 @@ public class MenubnController {
         }
     }
 
-    //Carrega as informações do bloco de notas na tabela
+    // Carrega as informações do bloco de notas na tabela
     public void carregarInformacoesTabela() throws SQLException {
         try {
             connection = DatabaseConnection.getConnection();
@@ -109,40 +107,20 @@ public class MenubnController {
         }
     }
 
-    //Carrega o nome do usuário no perfil
-    private void carregarNomeUsuario() throws SQLException {
-        String query = "SELECT Nome FROM usuario WHERE codUsuario = ?";
-        int codUsuario = 1;
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-
-            stmt.setInt(1, codUsuario);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                nomeUsuario = rs.getString("Nome");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
-
-    //Fecha o programa
+    // Fecha o programa
     @FXML
     public void sairButtonOnAction(ActionEvent e) {
         Stage stage = (Stage) sairButton.getScene().getWindow();
         stage.close();
     }
 
-    //Abre outra janela para a criação de uma nova nota em um bloco de notas
+    // Abre outra janela para a criação de uma nova nota em um bloco de notas
     @FXML
     public void abrirNovaNota(ActionEvent e) {
         TrocarCena.trocarCena((Stage) novaNotaButton.getScene().getWindow(), "novanota.fxml", 1280, 720);
     }
 
-    //Exclui um bloco de notas selecionado
+    // Exclui um bloco de notas selecionado
     @FXML
     public void excluirBlocoNota(ActionEvent e) {
         BlocoDeNotas blocoSelecionado = tabelaBlocos.getSelectionModel().getSelectedItem();
@@ -162,7 +140,7 @@ public class MenubnController {
         }
     }
 
-    //Abre outra aba quando clicado duas vezes em cima de um item ou ao clicar no item e em seguida no botão "Atualizar"
+    // Abre outra aba quando clicado duas vezes em cima de um item ou ao clicar no item e em seguida no botão "Atualizar"
     @FXML
     public void abrirBlocoNota() {
         BlocoDeNotas blocoSelecionado = tabelaBlocos.getSelectionModel().getSelectedItem();
@@ -177,7 +155,7 @@ public class MenubnController {
         }
     }
 
-    //Carrega as informações das notas
+    // Carrega as informações das notas
     private void carregarInformacoesBlocoNota(BlocoDeNotas bloco) throws SQLException {
         String query = "SELECT * FROM notas WHERE codBloco = ?";
 
@@ -198,55 +176,41 @@ public class MenubnController {
         }
     }
 
-    //Atualiza o bloco e a nota após clicado em "Atualizar"
+    // Atualiza as informações da nota selecionada
     @FXML
     public void atualizarNota(ActionEvent e) {
         BlocoDeNotas blocoSelecionado = tabelaBlocos.getSelectionModel().getSelectedItem();
 
         if (blocoSelecionado != null) {
             try {
-                connection = DatabaseConnection.getConnection();
-                String query = "UPDATE blocodenotas SET titulo = ? WHERE codBloco = ?";
-                preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, tituloBlocoField.getText());
-                preparedStatement.setInt(2, blocoSelecionado.getCodBloco());
-                preparedStatement.executeUpdate();
+                String query = "UPDATE notas SET nome = ?, conteudo = ? WHERE codBloco = ?";
 
-                query = "UPDATE notas SET nome = ?, conteudo = ? WHERE codBloco = ?";
                 preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, nomeNotaField.getText());
                 preparedStatement.setString(2, conteudoNotaArea.getText());
                 preparedStatement.setInt(3, blocoSelecionado.getCodBloco());
                 preparedStatement.executeUpdate();
 
-                //Mensagem de sucesso caso o bloco e a nota tenha sido salvos com sucesso
-                mensagemLabel.setText("Bloco e nota atualizada com sucesso!");
-                clearFields();
-                carregarInformacoesTabela();
+                mensagemLabel.setText("Nota atualizada com sucesso!");
 
-                //Mensagem desaparece depois de 4 segundos
-                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(4), evt -> mensagemLabel.setText("")));
+                Timeline timeline = new Timeline(new KeyFrame(
+                        Duration.millis(3000),
+                        ae -> mensagemLabel.setText("")));
                 timeline.play();
+
             } catch (SQLException ex) {
                 ex.printStackTrace();
-                mensagemLabel.setText("Erro ao atualizar a nota.");
+                mensagemLabel.setText("Erro ao atualizar nota.");
             }
-        } else {
-            mensagemLabel.setText("Nenhum bloco de notas selecionado.");
-            //Mensagem desaparece depois de 4 segundos
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(4), evt -> mensagemLabel.setText("")));
-            timeline.play();
         }
-    }
-
-    //Método para limpar os campos titulo, nome da nota e conteudo
-    public void clearFields() {
-        tituloBlocoField.setText("");
-        nomeNotaField.setText("");
-        conteudoNotaArea.setText("");
     }
 
     public void setCodUsuario(int codUsuario) {
         this.codUsuario = codUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+        usuarioMessageLabel.setText(nomeUsuario);  // Configura o texto do Label aqui
     }
 }
