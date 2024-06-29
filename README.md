@@ -68,4 +68,5 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE.md](L
 
 ## Agradecimentos
 - Pedro Manoel Ribeiro Rosa - [manoel1039](https://github.com/manoel1039)
+  
 - Daniel Umberto Timóteo Damazio - [DanielSUTD](https://github.com/DanielSUTD)
